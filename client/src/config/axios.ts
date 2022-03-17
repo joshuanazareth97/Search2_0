@@ -8,6 +8,7 @@ function select(state: RootState) {
 
 let baseURL;
 if (process.env.NODE_ENV === "production") {
+  ("http://ec2-65-0-170-182.ap-south-1.compute.amazonaws.com:3001/v1/api");
 } else {
   baseURL = "http://localhost:3001/v1/api";
 }

@@ -2,6 +2,7 @@ import Axios from "axios";
 
 let baseURL;
 if (process.env.NODE_ENV === "production") {
+  baseURL = "http://35.154.183.189:8080/api/v2";
 } else {
   baseURL = "http://35.154.183.189:8080/api/v2";
 }
