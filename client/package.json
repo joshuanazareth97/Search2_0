@@ -20,7 +20,7 @@
     "tsconfig.json"
   ],
   "scripts": {
-    "clean": "shx rm -rf dist .parcel-cache",
+    "clean": "rm -rf dist .parcel-cache",
     "build": "npm run clean && parcel build src/index.html",
     "start": "npm run clean && parcel src/index.html",
     "fmt": "prettier --write '{*,**/*}.{js,ts,jsx,tsx,json}'",
