@@ -26,7 +26,7 @@ const Layout = (props: Props) => {
   const { connection } = useConnection();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  console.log(request.defaults);
+  console.log(request.defaults, process.env.NODE_ENV);
   const isLoggedIn = !!useAppSelector(
     (state) =>
       state.persistedReducer.auth.pubKey && state.persistedReducer.auth.token
