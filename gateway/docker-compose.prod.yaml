@@ -5,9 +5,7 @@ services:
       - mongo
     build:
       context: ./
-      target: prod
-    volumes:
-      - .:/code
+      target: dev
     command: npm run start:production
     env_file: ./.env
     environment:

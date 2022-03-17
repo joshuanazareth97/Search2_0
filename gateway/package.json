@@ -1,10 +1,10 @@
 {
-  "name": "gateway.cfy.finance",
+  "name": "gateway",
   "version": "1.0.0",
   "scripts": {
     "build": "./node_modules/.bin/ts-node build.ts",
     "lint": "eslint . --ext .ts",
-    "start:production": "./node_modules/.bin/ts-node -r tsconfig-paths/register ./src",
+    "start:production": "ts-node -r tsconfig-paths/register ./src",
     "start": "nodemon",
     "test": "nodemon --config ./spec/nodemon.json",
     "test:no-reloading": "./node_modules/.bin/ts-node -r tsconfig-paths/register ./spec"
