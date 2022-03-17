@@ -5,7 +5,7 @@ COPY package.json ./
 COPY package-lock.json ./
 ENV NODE_ENV production
 RUN npm ci --silent
-# RUN npm install react-scripts@3.4.1 -g --silent
+RUN npm install parcel@2.3.1 -g --silent
 COPY ./ ./
 RUN npm run build
 
