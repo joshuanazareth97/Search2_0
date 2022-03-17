@@ -68,8 +68,6 @@ router.post(paths.query, async (req, res) => {
   const { query } = req.body;
   if (!query) throw new ParamMissingError();
   const result = await askQuestion(query);
-  console.log("++++++++++++++");
-  console.log(result);
   res.status(OK).json(result.data);
 });
 // Export default
