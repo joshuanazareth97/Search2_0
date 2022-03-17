@@ -6,8 +6,10 @@ services:
     build:
       context: ./
       target: dev
-    command: npm run start:production
+    volumes:
+      - .:/code
     env_file: ./.env
+    command: npm run start:production
     environment:
       - REDIS_HOST=cache
       - REDIS_PORT=$REDIS_DOCKER_PORT
