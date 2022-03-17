@@ -13,6 +13,9 @@ const theme = createTheme({
     primary: {
       main: "#4345e7",
     },
+    secondary: {
+      main: "#fffef",
+    },
   },
   components: {
     MuiButtonBase: {
