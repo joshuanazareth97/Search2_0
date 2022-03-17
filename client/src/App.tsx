@@ -80,7 +80,8 @@ const Context: FC<{ children: ReactNode }> = ({ children }) => {
 
 const Content: FC = () => {
   const isLoggedIn = !!useAppSelector(
-    (state) => state.persistedReducer.auth.pubKey
+    (state) =>
+      state.persistedReducer.auth.pubKey && state.persistedReducer.auth.token
   );
   useEffect(() => {
     console.log(isLoggedIn);
