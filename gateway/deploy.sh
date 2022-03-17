@@ -1,3 +1,3 @@
 #! /bin/bash
 git pull
-docker-compose up -d
+docker-compose -f docker-compose.prod.yaml up
