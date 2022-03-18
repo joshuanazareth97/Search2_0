@@ -1,6 +1,16 @@
 # **PostHuman**
 
-### Posthuman uses AI to generate custom responses to any query, better than human answers.
+Posthuman uses AI to generate custom responses to any query, better than human answers.
+
+[Visit the Demo Site!](http://posthumanai.network/)
+
+<br />
+
+- [**PostHuman**](#posthuman)
+  - [**Problem**](#problem)
+  - [**Solution**](#solution)
+  - [**Integrations**](#integrations)
+  - [**How to Run**](#how-to-run)
 
 <br />
 
@@ -25,8 +35,8 @@ Today, all information retrieval on the Internet relies on keyword search, acros
 
 ## **Integrations**
 
-- [ Solana ](https://solana.com/) and [Slope Wallet](https://slope.finance/) power the automated micropayments system. ��
-- Automated request pricing in SOL using [Serum's API](https://ss). ��
+- [ Solana ](https://solana.com/) and [Slope Wallet](https://slope.finance/) power the automated micropayments system. 🪙
+- Automated request pricing in SOL using [Serum's API](https://www.projectserum.com/). 📈
 
 <br />
 
