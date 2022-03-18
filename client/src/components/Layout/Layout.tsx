@@ -136,10 +136,11 @@ const Layout = (props: Props) => {
                 display: "flex",
                 alignItems: "center",
                 flexGrow: 1,
+                paddingTop: "0.5rem",
                 "& svg": {
                   width: "5rem",
                   height: "auto",
-                  marginRight: "1.5rem",
+                  marginRight: "0.5rem",
                   "&>g": {
                     fill: "white",
                   },
