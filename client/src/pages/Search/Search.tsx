@@ -1,6 +1,7 @@
 import { SearchSharp } from "@mui/icons-material";
 import {
   Box,
+  Button,
   CircularProgress,
   IconButton,
   InputAdornment,
@@ -8,7 +9,18 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useCallback, useState } from "react";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+import {
+  Keypair,
+  LAMPORTS_PER_SOL,
+  PublicKey,
+  sendAndConfirmRawTransaction,
+  sendAndConfirmTransaction,
+  SystemProgram,
+  Transaction,
+} from "@solana/web3.js";
+import base58 from "bs58";
+import React, { useCallback, useEffect, useState } from "react";
 import questionImg from "../../assets/images/question.png";
 import { request } from "../../config/axios";
 
@@ -24,15 +36,43 @@ const Search = (props: Props) => {
   const [loading, setLoading] = useState(false);
   const [answer, setAnswer] = useState("");
 
+  const { wallet, connect, sendTransaction, publicKey, signTransaction } =
+    useWallet();
+  const { connection } = useConnection();
+
+  useEffect(() => {
+    const getTx = async () => {};
+    getTx();
+  }, []);
+
   const handleSearch = useCallback(async () => {
     setLoading(true);
     setAnswer("");
+    const txSig = await sendTx();
     const result = await request.post("/users/query", {
       query: searchTerm,
+      txID: txSig,
     });
     setLoading(false);
     setAnswer(result.data.answers?.choices?.[0]?.text || "");
   }, [searchTerm, setSearchTerm, answer, setAnswer]);
+
+  let fromKeypair = Keypair.generate();
+
+  const sendTx = async () => {
+    if (!publicKey) return;
+    const transaction = new Transaction();
+    transaction.add(
+      SystemProgram.transfer({
+        fromPubkey: publicKey,
+        toPubkey: new PublicKey("7zg3CXi2Ved7Ac2PebF4h2DbimTgrRVW3MAgqJDzj19S"),
+        lamports: LAMPORTS_PER_SOL * 0.01,
+      })
+    );
+    const sig = await sendTransaction(transaction, connection);
+    const response = await connection.confirmTransaction(sig, "processed");
+    return sig;
+  };
 
   return (
     <>
@@ -78,6 +118,7 @@ const Search = (props: Props) => {
           alignSelf: "stretch",
         }}
       >
+        {/* <Button onClick={sendTx}>Send</Button> */}
         {loading && (
           <CircularProgress
             color="primary"
