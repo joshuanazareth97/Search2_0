@@ -57,8 +57,6 @@ const Search = (props: Props) => {
     setAnswer(result.data.answers?.choices?.[0]?.text || "");
   }, [searchTerm, setSearchTerm, answer, setAnswer]);
 
-  let fromKeypair = Keypair.generate();
-
   const sendTx = async () => {
     if (!publicKey) return;
     const transaction = new Transaction();
@@ -88,6 +86,11 @@ const Search = (props: Props) => {
             fontSize: "1.25rem",
             fontWeight: "bold",
           },
+        }}
+        onKeyUp={(event: React.KeyboardEvent<HTMLInputElement>) => {
+          if (event.key === "Enter") {
+            handleSearch();
+          }
         }}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           setLoading(false);

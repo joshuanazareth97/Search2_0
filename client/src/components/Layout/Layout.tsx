@@ -15,7 +15,7 @@ import {
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import base58 from "bs58";
 import React, { useCallback, useEffect, useState } from "react";
-import { FaChartLine } from "react-icons/fa";
+import { FaChartLine, FaDollarSign } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { request } from "../../config/axios";
 import { useAppDispatch, useAppSelector } from "../../hooks";
@@ -188,7 +188,7 @@ const Layout = (props: Props) => {
                   {latestQuote ? (
                     <>
                       <ListItemIcon>
-                        <Cloud fontSize="small" />
+                        <FaDollarSign size="1rem" />
                       </ListItemIcon>
                       <ListItemText>{latestQuote.value}</ListItemText>
                     </>
