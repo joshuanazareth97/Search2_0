@@ -82,6 +82,7 @@ const Search = (props: Props) => {
         sx={{
           alignSelf: "stretch",
           flexGrow: "1",
+          marginBottom: "2rem",
           "& input": {
             fontSize: "1.25rem",
             fontWeight: "bold",

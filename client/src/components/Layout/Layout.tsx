@@ -4,6 +4,7 @@ import {
   Box,
   CircularProgress,
   IconButton,
+  ListItem,
   ListItemIcon,
   ListItemText,
   Menu,
@@ -184,13 +185,20 @@ const Layout = (props: Props) => {
                   "aria-labelledby": "basic-button",
                 }}
               >
+                <Typography
+                  sx={{ padding: "0.25rem 0.5rem", fontWeight: "bold" }}
+                >
+                  Sol to USDT
+                </Typography>
                 <MenuItem onClick={handleChartClose}>
                   {latestQuote ? (
                     <>
                       <ListItemIcon>
                         <FaDollarSign size="1rem" />
                       </ListItemIcon>
-                      <ListItemText>{latestQuote.value}</ListItemText>
+                      <ListItemText sx={{ fontWeight: "bold" }}>
+                        {latestQuote.value}
+                      </ListItemText>
                     </>
                   ) : (
                     <CircularProgress />
