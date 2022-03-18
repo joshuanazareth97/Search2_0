@@ -8,6 +8,7 @@ import {
   ListItemText,
   Menu,
   MenuItem,
+  styled,
   Toolbar,
   Typography,
 } from "@mui/material";
@@ -20,6 +21,7 @@ import { request } from "../../config/axios";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { login, logout } from "../../slices/auth.slice";
 import { CustomWalletButton } from "../CustomWalletButton/CustomWalletButton";
+import Logo from "../Logo/Logo";
 
 type Props = {
   children?: React.ReactNode;
@@ -117,6 +119,12 @@ const Layout = (props: Props) => {
     setExchangeModalOpen(null);
   };
 
+  const StyledLogo = styled(Logo)`
+    "& g": {
+      fill: white;
+    }
+  `;
+
   return (
     <>
       <Box>
@@ -125,9 +133,19 @@ const Layout = (props: Props) => {
             <Typography
               variant="h6"
               component="div"
-              sx={{ flexGrow: 1, fontWeight: "bold" }}
+              sx={{
+                flexGrow: 1,
+                fontWeight: "bold",
+                "& svg": {
+                  width: "5rem",
+                  "&>g": {
+                    fill: "white",
+                  },
+                },
+              }}
             >
-              PostHuman AI
+              {/* <img src={logoImage} /> */}
+              <Logo />
             </Typography>
             <Box
               sx={{
