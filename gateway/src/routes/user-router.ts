@@ -10,9 +10,7 @@ import { askQuestion } from "src/config/axios.config";
 import { redisClient } from "src/config/redis.config";
 import { sign } from "tweetnacl";
 
-const anakin =
-  "09f26e402586e2faa8da4c98a35f1b20d6b033c6097befa8be3486a829587fe2f90a832bd3ff9d42710a4da095a2ce285b009f0c3730cd9b8e1af3eb84df6611";
-
+const anakin = process.env.ANAKIN;
 // Constants
 const router = Router();
 const { CREATED, OK, FORBIDDEN, NOT_MODIFIED, UNAUTHORIZED } = StatusCodes;
@@ -59,13 +57,16 @@ router.post(paths.authenticate, async (req, res) => {
   );
   if (isValid) {
     delete userMap[publicKey];
-    const token = jwt.sign({ publicKey }, anakin, { expiresIn: "1d" });
+    const token = jwt.sign({ publicKey }, anakin || "", { expiresIn: "1d" });
     res.status(OK).json(token);
   }
 });
 
 router.post(paths.query, async (req, res) => {
   const { query, txID } = req.body;
+  console.log(
+    req.user + "++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n"
+  );
   if (!(query && txID)) throw new ParamMissingError();
   let newTx;
   try {
@@ -91,7 +92,6 @@ router.post(paths.query, async (req, res) => {
       }
     } else {
       const txOnChain = await solanaConn.getTransaction(txID);
-      console.dir(txOnChain);
       if (
         txOnChain?.meta?.logMessages?.[1] ===
         "Program 11111111111111111111111111111111 success"

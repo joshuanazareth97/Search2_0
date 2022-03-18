@@ -1,4 +1,4 @@
-import Axios from "axios";
+import Axios, { AxiosRequestConfig } from "axios";
 
 import { RootState, store } from "../store";
 
@@ -14,8 +14,26 @@ if (process.env.NODE_ENV === "production") {
   baseURL = "http://localhost:3001/v1/api";
 }
 
-const request = Axios.create({
+const axiosParams: AxiosRequestConfig = {
   baseURL,
-});
+};
+
+const request = Axios.create(axiosParams);
+
+request.interceptors.request.use(
+  (config) => {
+    const token = select(store.getState());
+    if (token) {
+      config.headers.common = {
+        ...config.headers.common,
+        Authorization: "Bearer " + token,
+      };
+      return config;
+    }
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 export { request };

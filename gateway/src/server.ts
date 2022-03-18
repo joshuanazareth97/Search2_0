@@ -11,6 +11,12 @@ import { connectDB } from "./config/db.config";
 import { redisClient } from "./config/redis.config";
 import apiRouter from "./routes/api";
 import cors from "cors";
+import {
+  JwtPayload,
+  verify as jwtVerify,
+  VerifyCallback,
+  VerifyOptions,
+} from "jsonwebtoken";
 
 // Constants
 const app = express();
@@ -37,6 +43,26 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Authentication
+function authenticateToken(req: Request, res: Response, next: NextFunction) {
+  try {
+    const authHeader = req.headers["authorization"];
+    const signedToken = authHeader && authHeader.split(" ")[1];
+
+    if (signedToken == null) return res.sendStatus(401);
+
+    const token = jwtVerify(
+      signedToken,
+      process.env.ANAKIN as string
+    ) as JwtPayload & { publicKey: string };
+
+    req.user = token.publicKey;
+    next();
+  } catch (err) {
+    logger.err(err);
+    return res.sendStatus(403);
+  }
+}
+app.use(authenticateToken);
 
 /***********************************************************************************
  *                         API routes and error handling
