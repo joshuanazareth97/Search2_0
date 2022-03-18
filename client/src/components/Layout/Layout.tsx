@@ -130,23 +130,34 @@ const Layout = (props: Props) => {
       <Box>
         <AppBar position="static">
           <Toolbar>
-            <Typography
-              variant="h6"
+            <Box
               component="div"
               sx={{
+                display: "flex",
+                alignItems: "center",
                 flexGrow: 1,
-                fontWeight: "bold",
                 "& svg": {
                   width: "5rem",
+                  height: "auto",
+                  marginRight: "1.5rem",
                   "&>g": {
                     fill: "white",
                   },
                 },
               }}
             >
-              {/* <img src={logoImage} /> */}
               <Logo />
-            </Typography>
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{
+                  fontWeight: "bold",
+                  fontStyle: "italic",
+                }}
+              >
+                PostHuman
+              </Typography>
+            </Box>
             <Box
               sx={{
                 display: "flex",
