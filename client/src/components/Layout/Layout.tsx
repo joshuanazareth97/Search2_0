@@ -132,6 +132,7 @@ const Layout = (props: Props) => {
             <Box
               sx={{
                 display: "flex",
+                alignItems: "center",
               }}
             >
               <IconButton
