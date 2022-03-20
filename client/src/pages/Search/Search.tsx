@@ -46,15 +46,19 @@ const Search = (props: Props) => {
   }, []);
 
   const handleSearch = useCallback(async () => {
-    setLoading(true);
-    setAnswer("");
-    const txSig = await sendTx();
-    const result = await request.post("/users/query", {
-      query: searchTerm,
-      txID: txSig,
-    });
-    setLoading(false);
-    setAnswer(result.data.answers?.choices?.[0]?.text || "");
+    try {
+      setLoading(true);
+      setAnswer("");
+      const txSig = await sendTx();
+      const result = await request.post("/users/query", {
+        query: searchTerm,
+        txID: txSig,
+      });
+      setLoading(false);
+      setAnswer(result.data.answers?.choices?.[0]?.text || "");
+    } catch (err) {
+      setLoading(false);
+    }
   }, [searchTerm, setSearchTerm, answer, setAnswer]);
 
   const sendTx = async () => {
