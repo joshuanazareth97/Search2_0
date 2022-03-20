@@ -29,7 +29,6 @@ request.interceptors.request.use(
         Authorization: "Bearer " + token,
       };
     }
-    console.log("called");
     return config;
   },
   (error) => {

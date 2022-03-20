@@ -31,7 +31,6 @@ function authenticateToken(req: Request, res: Response, next: NextFunction) {
     req.user = token.publicKey;
     next();
   } catch (err) {
-    console.log(err);
     return res.sendStatus(403);
   }
 }

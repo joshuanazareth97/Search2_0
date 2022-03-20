@@ -83,9 +83,7 @@ const Content: FC = () => {
     (state) =>
       state.persistedReducer.auth.pubKey && state.persistedReducer.auth.token
   );
-  useEffect(() => {
-    console.log(isLoggedIn);
-  }, [isLoggedIn]);
+
   return (
     <BrowserRouter>
       <Routes>
