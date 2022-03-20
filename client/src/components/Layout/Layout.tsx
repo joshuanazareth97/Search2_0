@@ -57,6 +57,8 @@ const Layout = (props: Props) => {
         const nonceResult = await request.get(
           `/users/nonce/${publicKey.toJSON()}`
         );
+        console.log("publicKey", publicKey);
+        console.log(nonceResult.data);
         if (!nonceResult.data.nonce) return;
         const message = new TextEncoder().encode(nonceResult.data.nonce);
         const signedArray = await signMessage?.(message);

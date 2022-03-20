@@ -28,8 +28,9 @@ request.interceptors.request.use(
         ...config.headers.common,
         Authorization: "Bearer " + token,
       };
-      return config;
     }
+    console.log("called");
+    return config;
   },
   (error) => {
     return Promise.reject(error);

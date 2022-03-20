@@ -3,9 +3,9 @@ import { ParamMissingError, UnauthorisedError } from "@shared/errors";
 import { clusterApiUrl, Connection } from "@solana/web3.js";
 import base58 from "bs58";
 import { randomBytes } from "crypto";
-import { Router } from "express";
+import { NextFunction, Request, Response, Router } from "express";
 import StatusCodes from "http-status-codes";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload, verify as jwtVerify } from "jsonwebtoken";
 import { askQuestion } from "src/config/axios.config";
 import { redisClient } from "src/config/redis.config";
 import { sign } from "tweetnacl";
@@ -16,6 +16,25 @@ const router = Router();
 const { CREATED, OK, FORBIDDEN, NOT_MODIFIED, UNAUTHORIZED } = StatusCodes;
 
 const solanaConn = new Connection(clusterApiUrl("devnet"), "confirmed");
+
+// Auth Middleware
+function authenticateToken(req: Request, res: Response, next: NextFunction) {
+  try {
+    const authHeader: String = req.headers["authorization"] as String;
+    const signedToken = authHeader && authHeader.split(" ")[1];
+    if (signedToken == null) return res.sendStatus(401);
+    const token = jwtVerify(
+      signedToken,
+      process.env.ANAKIN as string
+    ) as JwtPayload & { publicKey: string };
+
+    req.user = token.publicKey;
+    next();
+  } catch (err) {
+    console.log(err);
+    return res.sendStatus(403);
+  }
+}
 
 // Paths
 export const paths = {
@@ -62,11 +81,8 @@ router.post(paths.authenticate, async (req, res) => {
   }
 });
 
-router.post(paths.query, async (req, res) => {
+router.post(paths.query, authenticateToken, async (req, res) => {
   const { query, txID } = req.body;
-  console.log(
-    req.user + "++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n"
-  );
   if (!(query && txID)) throw new ParamMissingError();
   let newTx;
   try {
@@ -98,7 +114,7 @@ router.post(paths.query, async (req, res) => {
       ) {
         newTx = new Transaction({
           txID,
-          publicKey: "aaaaa",
+          publicKey: req.user,
           questionHash: query,
         });
         newTx.save();
