@@ -95,7 +95,7 @@ router.post(paths.query, authenticateToken, async (req, res) => {
           .json({ error: "Transaction expired" });
       } else {
         if (txItem.questionHash === query) {
-          const result = await askQuestion(query);
+          const result = await askQuestion(query, req.user || "");
           txItem.isAnswered = true;
           txItem.save();
           return res.status(OK).json(result.data);
@@ -117,7 +117,7 @@ router.post(paths.query, authenticateToken, async (req, res) => {
           questionHash: query,
         });
         newTx.save();
-        const result = await askQuestion(query);
+        const result = await askQuestion(query, req.user || "");
         newTx.isAnswered = true;
         newTx.save();
         return res.status(OK).json(result.data);

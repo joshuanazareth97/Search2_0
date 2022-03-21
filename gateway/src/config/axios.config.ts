@@ -11,9 +11,10 @@ const davinciClient = Axios.create({
   baseURL,
 });
 
-const askQuestion = async (query: string) => {
+const askQuestion = async (query: string, userID: string) => {
   return await davinciClient.post("/search", {
     query,
+    userID,
   });
 };
 
