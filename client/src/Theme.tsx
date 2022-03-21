@@ -14,7 +14,10 @@ const theme = createTheme({
       main: "#4345e7",
     },
     secondary: {
-      main: "#fffef",
+      main: "#ff79c6",
+    },
+    text: {
+      primary: "#fffef",
     },
   },
   components: {
