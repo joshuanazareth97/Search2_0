@@ -132,6 +132,20 @@ const Login = (props: Props) => {
             gives it a wider perspective on prospective solutions than what any
             single human could contain in their memory.
           </Typography>
+          <Typography
+            id="modal-modal-description"
+            sx={{ fontSize: "0.875rem", mt: 2 }}
+          >
+            For any feedback, concerns, or queries reach out to us via{" "}
+            <a href="mailto:dhruv.luci9@gmail.com" target="_blank">
+              email
+            </a>{" "}
+            or on
+            <a href="https://discord.gg/sU6R3zRC" target="_blank">
+              {" "}
+              Discord
+            </a>
+          </Typography>
         </Box>
       </Dialog>
     </>
