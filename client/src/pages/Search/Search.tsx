@@ -35,6 +35,7 @@ const Search = (props: Props) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(false);
   const [answer, setAnswer] = useState("");
+  const [error, setError] = useState("");
 
   const { wallet, connect, sendTransaction, publicKey, signTransaction } =
     useWallet();
@@ -47,6 +48,9 @@ const Search = (props: Props) => {
 
   const handleSearch = useCallback(async () => {
     try {
+      if (searchTerm.length > 1000) {
+        return setError("The search term cannot exceed 1000 characters");
+      }
       setLoading(true);
       setAnswer("");
       const txSig = await sendTx();
@@ -60,6 +64,13 @@ const Search = (props: Props) => {
       setLoading(false);
     }
   }, [searchTerm, setSearchTerm, answer, setAnswer]);
+
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setLoading(false);
+    if (searchTerm.length < 1000) setError("");
+    setAnswer("");
+    setSearchTerm(event.target.value);
+  };
 
   const sendTx = async () => {
     if (!publicKey) return;
@@ -83,7 +94,8 @@ const Search = (props: Props) => {
         placeholder="Ask me anything"
         variant="filled"
         hiddenLabel
-        inputProps={{ maxLength: 1000 }}
+        error={!!error}
+        helperText={error}
         sx={{
           alignSelf: "stretch",
           flexGrow: "1",
@@ -98,11 +110,7 @@ const Search = (props: Props) => {
             handleSearch();
           }
         }}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          setLoading(false);
-          setAnswer("");
-          setSearchTerm(event.target.value);
-        }}
+        onChange={handleInput}
         disabled={loading}
         InputProps={{
           endAdornment: (
