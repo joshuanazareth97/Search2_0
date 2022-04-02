@@ -6,6 +6,7 @@ services:
     build:
       context: ./
       target: dev
+    restart: unless-stopped
     volumes:
       - .:/code
     command: npm start
@@ -34,6 +35,7 @@ services:
     image: redis:latest
     container_name: cache
     env_file: ./.env
+    restart: unless-stopped
     environment:
       - ALLOW_EMPTY_PASSWORD=yes # add pw for production
     ports:
