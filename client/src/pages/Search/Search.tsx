@@ -83,6 +83,7 @@ const Search = (props: Props) => {
         placeholder="Ask me anything"
         variant="filled"
         hiddenLabel
+        inputProps={{ maxLength: 1000 }}
         sx={{
           alignSelf: "stretch",
           flexGrow: "1",
