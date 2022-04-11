@@ -15,7 +15,7 @@ const anakin = process.env.ANAKIN;
 const router = Router();
 const { CREATED, OK, FORBIDDEN, NOT_MODIFIED, UNAUTHORIZED } = StatusCodes;
 
-const solanaConn = new Connection(clusterApiUrl("devnet"), "confirmed");
+const solanaConn = new Connection(clusterApiUrl("mainnet-beta"), "confirmed");
 
 // Auth Middleware
 function authenticateToken(req: Request, res: Response, next: NextFunction) {
