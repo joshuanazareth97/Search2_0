@@ -6,7 +6,7 @@ COPY package-lock.json ./
 ENV NODE_ENV production
 RUN npm ci --silent
 RUN apk --no-cache add g++ gcc libgcc libstdc++ linux-headers make python git fts-dev
-RUN npm i parcel@2.3.1
+RUN npm i parcel@2.3.1 -g
 COPY ./ ./
 RUN npm run build
 
