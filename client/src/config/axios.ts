@@ -8,7 +8,8 @@ function select(state: RootState) {
 
 let baseURL;
 if (process.env.NODE_ENV === "production") {
-  baseURL = "http://ec2-13-127-122-214.ap-south-1.compute.amazonaws.com/v1/api";
+  baseURL =
+    "http://ec2-13-127-122-214.ap-south-1.compute.amazonaws.com:3001/v1/api";
 } else {
   baseURL = "http://localhost:3001/v1/api";
 }
