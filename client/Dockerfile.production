@@ -4,6 +4,7 @@ WORKDIR /app
 COPY package.json ./
 COPY package-lock.json ./
 ENV NODE_ENV production
+RUN npm -g config set user root
 RUN npm ci --silent
 RUN apk --no-cache add g++ gcc libgcc libstdc++ linux-headers make python git fts-dev
 RUN npm i parcel@2.3.1 -g
