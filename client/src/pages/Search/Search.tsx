@@ -79,7 +79,7 @@ const Search = (props: Props) => {
       SystemProgram.transfer({
         fromPubkey: publicKey,
         toPubkey: new PublicKey("7zg3CXi2Ved7Ac2PebF4h2DbimTgrRVW3MAgqJDzj19S"),
-        lamports: LAMPORTS_PER_SOL * 0.01,
+        lamports: LAMPORTS_PER_SOL * 0.0005,
       })
     );
     const sig = await sendTransaction(transaction, connection);
