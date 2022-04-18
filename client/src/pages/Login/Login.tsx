@@ -52,18 +52,20 @@ const Login = (props: Props) => {
               installed.
             </li>
             <li>
-              Go to the wallet extension settings to switch to the Solana
-              devnet, and get your wallet funded with devnet{" "}
-              <a href="https://solfaucet.com/">SOL tokens</a>.
+              Make sure that the Solana mainnet is selected in your wallet, and
+              that your account has a few dollars worth of SOL in it.
             </li>
-            <li> Connect your wallet and log in using the top right menu.</li>
             <li>
-              Start asking questions! Funds will be auto-streamed from your
-              wallet for every query. <br />
-              <small>
-                [Note: Devnet funds do not have any monetary value, so this is a
-                free demo service at the moment]
-              </small>
+              {" "}
+              Connect your wallet and log in using the top right menu. To avoid
+              repeatedly signing transactions, make sure that you set the
+              "Auto-approve Transactions" toggle.
+            </li>
+            <li>
+              Start asking questions! USD 0.05 (~ 0.0002 SOL) will be
+              auto-streamed from your wallet for every query. That's 200
+              questions for $10!
+              <br />
             </li>
           </ol>
         </Typography>
@@ -130,7 +132,11 @@ const Login = (props: Props) => {
             conjecture on cutting edge scientific and engineering fields. This
             is to be expected from the huge dataset it was trained on - which
             gives it a wider perspective on prospective solutions than what any
-            single human could contain in their memory.
+            single human could contain in their memory. <br /> <br />
+            <em>
+              This AI has been conditionally approved for commercial use by
+              openAI.
+            </em>
           </Typography>
           <Typography
             id="modal-modal-description"
